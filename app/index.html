@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neon Coast — GTA-style Cover Studio</title>
+<meta name="description" content="Turn any photo and caption into GTA-style multi-panel cover art, offline in your browser. Export a PNG to share.">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<main class="app">
+  <section class="controls" aria-label="Cover controls">
+    <header>
+      <h1>NEON COAST</h1>
+      <p class="tagline">GTA-style cover studio — offline, your photos never leave this machine.</p>
+    </header>
+
+    <div class="group">
+      <label class="file-btn">📷 Add photos
+        <input id="photo" type="file" accept="image/*" multiple>
+      </label>
+      <p class="hint">Two sample photos are loaded already — add your own, or use them. Click a panel in the preview, then drag it to reposition the photo inside.</p>
+      <div id="photoChips" class="chips" aria-label="Photos"></div>
+    </div>
+
+    <div class="group">
+      <label for="title">Title</label>
+      <input id="title" type="text" maxlength="24" value="NEON COAST" autocomplete="off">
+      <label for="subtitle">Subtitle (script)</label>
+      <input id="subtitle" type="text" maxlength="32" value="sunset shores" autocomplete="off">
+    </div>
+
+    <div class="group">
+      <span class="label">Layout</span>
+      <div id="layouts" class="pills"></div>
+    </div>
+
+    <div class="group">
+      <span class="label">Colour grade</span>
+      <div id="grades" class="pills"></div>
+    </div>
+
+    <div class="group">
+      <span class="label">Export size</span>
+      <div id="sizes" class="pills"></div>
+    </div>
+
+    <div class="group panel-edit">
+      <span class="label" id="panelLabel">Panel 1 of 4</span>
+      <label>Zoom <output id="zoomVal">100%</output>
+        <input id="zoom" type="range" min="0.6" max="3" step="0.01" value="1">
+      </label>
+      <label class="check"><input id="flip" type="checkbox"> Flip photo</label>
+      <button id="resetPanels" type="button" class="ghost">Reset all panels</button>
+    </div>
+
+    <div class="group effects">
+      <span class="label">Print finish</span>
+      <label class="check"><input id="grain" type="checkbox" checked> Film grain</label>
+      <label class="check"><input id="vignette" type="checkbox" checked> Vignette</label>
+      <label class="check"><input id="halftone" type="checkbox" checked> Halftone title dots</label>
+      <label class="check"><input id="frame" type="checkbox" checked> White poster frame</label>
+      <label class="check"><input id="badge" type="checkbox" checked> Badge ribbon</label>
+      <label>Heat ★ <output id="heatVal">3</output>
+        <input id="heat" type="range" min="0" max="5" step="1" value="3">
+      </label>
+    </div>
+
+    <div class="actions">
+      <button id="export" type="button" class="primary">⬇ Export PNG</button>
+      <button id="exportAll" type="button">Export all 3 sizes</button>
+    </div>
+    <div class="history">
+      <button id="undo" type="button" disabled>↩ Undo</button>
+      <button id="redo" type="button" disabled>↪ Redo</button>
+    </div>
+    <p id="status" role="status"></p>
+    <p id="selftest" class="selftest"></p>
+    <footer>Original art &amp; lettering (Anton + Pacifico, SIL OFL). No Rockstar logo, artwork or fonts.</footer>
+  </section>
+
+  <section class="stage" aria-label="Cover preview">
+    <canvas id="preview" width="880" height="880" aria-label="Live cover preview"></canvas>
+    <p class="stage-hint">Live preview — what you see is the PNG you export. Drag inside a panel to pan its photo.</p>
+  </section>
+</main>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
